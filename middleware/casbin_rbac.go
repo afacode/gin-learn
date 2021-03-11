@@ -1,7 +1,9 @@
 package middleware
 
 import (
+	"gin-learn/model/request"
 	"gin-learn/model/response"
+	"gin-learn/service"
 
 	"github.com/gin-gonic/gin"
 )
@@ -9,7 +11,18 @@ import (
 func CasbinHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// 权限校验
-		success := true
+		claims, _ := c.Get("claims")
+		waitUse := claims.(*request.CustomClaims)
+		// 获取请求的URI
+		obj := c.Request.URL.RequestURI()
+		// 获取请求方法
+		act := c.Request.Method
+		// 获取用户的角色
+		sub := waitUse.AuthorityId
+		e := service.Casbin()
+		// 判断策略中是否存在
+		success, _ := e.Enforce(sub, obj, act)
+
 		if success {
 			c.Next()
 		} else {

@@ -24,7 +24,7 @@ func JWTAuth() gin.HandlerFunc {
 		// 解析token中包含的相关信息(有效载荷)
 		claims, err := j.ParseToken(token)
 
-		fmt.Printf("token 解析 %#v", claims)
+		fmt.Printf("token解析%#v\n", claims)
 		if err != nil {
 			if err == TokenExpired {
 				response.FailWithDetailed(gin.H{"reload": true}, "授权已过期", c)
