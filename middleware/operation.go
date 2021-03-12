@@ -65,8 +65,6 @@ func OperationRecord() gin.HandlerFunc {
 		record.Status = c.Writer.Status()
 		record.Latency = latency
 		record.Resp = writer.body.String()
-		fmt.Println("操作日志")
-		fmt.Println(record)
 
 		if err := service.CreateSysOperationRecord(record); err != nil {
 			fmt.Println("操作日志保存失败")

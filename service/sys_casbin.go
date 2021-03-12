@@ -73,11 +73,9 @@ func Casbin() *casbin.Enforcer {
 		fmt.Println(error)
 		panic(error)
 	}
-	e, err := casbin.NewEnforcer("../model.conf", adapter)
+	e, err := casbin.NewEnforcer("./model.conf", adapter)
 	if err != nil {
-		fmt.Println("执行出错")
-		fmt.Println(err)
-		panic(error)
+		fmt.Printf("执行出错%v", err)
 	}
 	e.AddFunction("ParamsMatch", ParamsMatchFunc)
 	_ = e.LoadPolicy()
