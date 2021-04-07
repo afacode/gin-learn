@@ -10,5 +10,6 @@ func InitBaseRouter(Router *gin.RouterGroup) {
 	BaseRouter := Router.Group("base")
 	{
 		BaseRouter.POST("login", v1.Login)
+		BaseRouter.GET("k", v1.GetK)
 	}
 }

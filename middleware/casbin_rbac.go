@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	"fmt"
 	"gin-learn/model/request"
 	"gin-learn/model/response"
 	"gin-learn/service"
@@ -21,8 +20,6 @@ func CasbinHandler() gin.HandlerFunc {
 		// 获取用户的角色
 		sub := waitUse.AuthorityId
 		e := service.Casbin()
-		fmt.Println("*casbin.Enforcer")
-		fmt.Println(e)
 		// 判断策略中是否存在
 		success, _ := e.Enforce(sub, obj, act)
 

@@ -2,7 +2,6 @@ package middleware
 
 import (
 	"errors"
-	"fmt"
 	"gin-learn/model/request"
 	"gin-learn/model/response"
 
@@ -18,13 +17,10 @@ func JWTAuth() gin.HandlerFunc {
 			c.Abort()
 			return
 		}
-		fmt.Printf("token: %s\n", token)
 		// 初始化一个JWT对象实例，并根据结构体方法来解析token
 		j := NewJWT()
 		// 解析token中包含的相关信息(有效载荷)
 		claims, err := j.ParseToken(token)
-
-		fmt.Printf("token解析%#v\n", claims)
 		if err != nil {
 			if err == TokenExpired {
 				response.FailWithDetailed(gin.H{"reload": true}, "授权已过期", c)

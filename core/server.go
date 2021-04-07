@@ -16,6 +16,10 @@ func RunApplicationServer() {
 			model.SysAuthority{},
 			model.SysBaseMenu{},
 			model.SysBaseMenuParameter{},
+			// model.SysMenu{},
+			model.LuckyK{},
+			model.SysOperationRecord{},
+			model.CasbinModel{},
 		)
 		db, _ := global.G_DB.DB()
 		defer db.Close()
